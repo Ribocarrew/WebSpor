@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "prebuild": "node scripts/brand-assets.mjs",
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace @webspor/contracts && npm run build --workspace @webspor/design-tokens && npm run build --workspace @webspor/content && npm run build --workspace @webspor/rules && npm run build --workspace @webspor/fixtures && npm run build --workspace @webspor/web && npm run build --workspace @webspor/api && npm run build --workspace @webspor/scanner",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc -b",
