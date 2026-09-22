@@ -1,0 +1,44 @@
+:root {
+  /* Brand colors */
+  --brand-teal: #0F766E;
+  --brand-amber: #D97706;
+
+  /* Surfaces */
+  --surface-canvas: #F5F5F4;
+  --surface-card: #FFFFFF;
+
+  /* Text colors */
+  --text-primary: #1E293B;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-inverse: #FFFFFF;
+  --text-on-amber: #1E293B; /* WCAG 2.2 AA requirement: never white on amber */
+
+  /* Borders & states */
+  --border-default: #E2E8F0;
+  --border-subtle: #CBD5E1;
+  --border-strong: #0F766E;
+  --state-error: #DC2626;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+
+  /* Radii */
+  --radius-card: 16px;
+  --radius-input: 8px;
+  --radius-badge: 999px;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Layout */
+  --max-width: 1280px;
+}

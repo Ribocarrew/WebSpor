@@ -141,3 +141,7 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Brand assets generated at build (docs/design/brand.md)
+public/brand/
+apps/web/public/brand/

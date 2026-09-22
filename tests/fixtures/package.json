@@ -1,0 +1,26 @@
+{
+  "name": "@webspor/fixtures",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./success.json": "./src/success.json",
+    "./partial.json": "./src/partial.json",
+    "./failed.json": "./src/failed.json"
+  },
+  "scripts": {
+    "build": "tsc",
+    "generate": "tsx src/generate.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@webspor/contracts": "*",
+    "@webspor/rules": "*"
+  }
+}

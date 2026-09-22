@@ -1,0 +1,19 @@
+# Base image with official Playwright Chromium dependencies
+FROM mcr.microsoft.com/playwright:v1.49.0-noble AS runner
+
+WORKDIR /app
+ENV NODE_ENV=production
+
+# Security: non-root user per S-03
+USER pwuser
+
+COPY package*.json tsconfig*.json ./
+COPY packages/ ./packages/
+COPY services/scanner/ ./services/scanner/
+
+# Build scanner
+RUN npm ci && npm run build --workspace=@webspor/scanner
+
+# Container hardening (non-root). NOTE: Standard Docker containers and browser filters do NOT provide
+# documented network- or microVM-isolation (required by ADR-007 before live usage).
+CMD ["node", "services/scanner/dist/index.js"]

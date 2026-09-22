@@ -1,0 +1,35 @@
+{
+  "name": "webspor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WebSpor - Se sporene bag websitet",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "services/*",
+    "tests/*"
+  ],
+  "scripts": {
+    "prebuild": "node scripts/brand-assets.mjs",
+    "build": "npm run build --workspace @webspor/contracts && npm run build --workspace @webspor/design-tokens && npm run build --workspace @webspor/content && npm run build --workspace @webspor/rules && npm run build --workspace @webspor/fixtures && npm run build --workspace @webspor/web && npm run build --workspace @webspor/api && npm run build --workspace @webspor/scanner",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -b",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "@ribocarrew/sandboxmodellen-assets": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "sharp": "^0.33.5",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7",
+    "zod": "3.24.2"
+  },
+  "license": "MIT"
+}
