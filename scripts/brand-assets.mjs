@@ -18,21 +18,21 @@ const jobs = [
 ];
 
 await mkdir(OUT, { recursive: true });
-await mkdir(WEB_OUT, { recursive: true }).catch(() => {});
+await mkdir(WEB_OUT, { recursive: true });
 
 for (const j of jobs) {
   const img = sharp(j.src).resize({ width: j.width });
   if (j.png) {
     const pngPath = `${OUT}/${j.name}.png`;
     await img.png({ compressionLevel: 9 }).toFile(pngPath);
-    await copyFile(pngPath, `${WEB_OUT}/${j.name}.png`).catch(() => {});
+    await copyFile(pngPath, `${WEB_OUT}/${j.name}.png`);
   } else {
     const webpPath = `${OUT}/${j.name}.webp`;
     const pngPath = `${OUT}/${j.name}.png`;
     await img.clone().webp({ quality: 85 }).toFile(webpPath);
     await img.clone().png({ compressionLevel: 9 }).toFile(pngPath);
-    await copyFile(webpPath, `${WEB_OUT}/${j.name}.webp`).catch(() => {});
-    await copyFile(pngPath, `${WEB_OUT}/${j.name}.png`).catch(() => {});
+    await copyFile(webpPath, `${WEB_OUT}/${j.name}.webp`);
+    await copyFile(pngPath, `${WEB_OUT}/${j.name}.png`);
   }
 }
 console.log('Brand-assets skrevet til', OUT);
