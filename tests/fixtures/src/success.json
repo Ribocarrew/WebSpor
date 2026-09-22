@@ -1,0 +1,635 @@
+{
+  "schemaVersion": "1.0.0",
+  "scanProfileVersion": "baseline-v1",
+  "engineVersion": "1.0.0",
+  "rulesetVersion": "1.0.0",
+  "redactionVersion": "1.0.0",
+  "datasetVersions": [],
+  "id": "scan-demo-success",
+  "startedAt": "2026-09-22T12:00:00.000Z",
+  "finishedAt": "2026-09-22T12:00:08.500Z",
+  "expiresAt": "2026-09-22T13:00:00.000Z",
+  "status": "completed",
+  "target": {
+    "requestedOrigin": "https://skole.example",
+    "finalOrigin": "https://skole.example"
+  },
+  "environment": {
+    "browserVersion": "Chromium 130.0.6723.69",
+    "region": "eu-north-1",
+    "locale": "da-DK",
+    "timezone": "Europe/Copenhagen",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  "collectors": {
+    "network": {
+      "status": "complete",
+      "startedAt": "2026-09-22T12:00:00.050Z",
+      "finishedAt": "2026-09-22T12:00:08.000Z"
+    },
+    "cookies": {
+      "status": "complete",
+      "startedAt": "2026-09-22T12:00:08.010Z",
+      "finishedAt": "2026-09-22T12:00:08.100Z"
+    },
+    "storage": {
+      "status": "complete",
+      "startedAt": "2026-09-22T12:00:08.110Z",
+      "finishedAt": "2026-09-22T12:00:08.200Z"
+    },
+    "headers": {
+      "status": "complete",
+      "startedAt": "2026-09-22T12:00:00.350Z",
+      "finishedAt": "2026-09-22T12:00:00.390Z"
+    },
+    "transport": {
+      "status": "complete",
+      "startedAt": "2026-09-22T12:00:00.050Z",
+      "finishedAt": "2026-09-22T12:00:00.355Z"
+    }
+  },
+  "limitations": [
+    "PASSIVE_BASELINE_NO_CLICK",
+    "GET_HEAD_ONLY",
+    "SINGLE_ORIGIN_VISIT",
+    "NO_TRACKER_DATASET_LOADED"
+  ],
+  "observations": [
+    {
+      "id": "obs-net-001",
+      "kind": "request_attempt",
+      "collector": "network",
+      "observedAt": "2026-09-22T12:00:00.100Z",
+      "data": {
+        "requestRef": "req-01",
+        "origin": "https://skole.example",
+        "method": "GET",
+        "resourceType": "document",
+        "relativeTimeMs": 100
+      }
+    },
+    {
+      "id": "obs-net-002",
+      "kind": "response_received",
+      "collector": "network",
+      "observedAt": "2026-09-22T12:00:00.350Z",
+      "data": {
+        "requestRef": "req-01",
+        "origin": "https://skole.example",
+        "status": 200,
+        "relativeTimeMs": 350,
+        "mimeType": "text/html"
+      }
+    },
+    {
+      "id": "obs-trans-001",
+      "kind": "transport",
+      "collector": "transport",
+      "observedAt": "2026-09-22T12:00:00.355Z",
+      "data": {
+        "finalScheme": "https",
+        "tlsStatus": "valid",
+        "downgraded": false
+      }
+    },
+    {
+      "id": "obs-hdr-hsts",
+      "kind": "header_check",
+      "collector": "headers",
+      "observedAt": "2026-09-22T12:00:00.360Z",
+      "data": {
+        "headerName": "Strict-Transport-Security",
+        "present": true,
+        "parserStatus": "valid",
+        "normalizedDirectives": {
+          "max-age": 31536000,
+          "includeSubDomains": true
+        }
+      }
+    },
+    {
+      "id": "obs-hdr-csp",
+      "kind": "header_check",
+      "collector": "headers",
+      "observedAt": "2026-09-22T12:00:00.365Z",
+      "data": {
+        "headerName": "Content-Security-Policy",
+        "present": true,
+        "parserStatus": "valid",
+        "normalizedDirectives": {
+          "default-src": "'self'",
+          "frame-ancestors": "'self'"
+        }
+      }
+    },
+    {
+      "id": "obs-hdr-ref",
+      "kind": "header_check",
+      "collector": "headers",
+      "observedAt": "2026-09-22T12:00:00.370Z",
+      "data": {
+        "headerName": "Referrer-Policy",
+        "present": true,
+        "parserStatus": "valid",
+        "normalizedDirectives": {
+          "policy": "strict-origin-when-cross-origin"
+        }
+      }
+    },
+    {
+      "id": "obs-hdr-nosniff",
+      "kind": "header_check",
+      "collector": "headers",
+      "observedAt": "2026-09-22T12:00:00.375Z",
+      "data": {
+        "headerName": "X-Content-Type-Options",
+        "present": true,
+        "parserStatus": "valid",
+        "normalizedDirectives": {
+          "value": "nosniff"
+        }
+      }
+    },
+    {
+      "id": "obs-hdr-xfo",
+      "kind": "header_check",
+      "collector": "headers",
+      "observedAt": "2026-09-22T12:00:00.380Z",
+      "data": {
+        "headerName": "X-Frame-Options",
+        "present": true,
+        "parserStatus": "valid",
+        "normalizedDirectives": {
+          "value": "SAMEORIGIN"
+        }
+      }
+    },
+    {
+      "id": "obs-net-003",
+      "kind": "request_attempt",
+      "collector": "network",
+      "observedAt": "2026-09-22T12:00:00.600Z",
+      "data": {
+        "requestRef": "req-02",
+        "origin": "https://statistisk.analyse.example",
+        "method": "GET",
+        "resourceType": "script",
+        "relativeTimeMs": 600
+      }
+    },
+    {
+      "id": "obs-net-004",
+      "kind": "response_received",
+      "collector": "network",
+      "observedAt": "2026-09-22T12:00:00.850Z",
+      "data": {
+        "requestRef": "req-02",
+        "origin": "https://statistisk.analyse.example",
+        "status": 200,
+        "relativeTimeMs": 850,
+        "mimeType": "application/javascript"
+      }
+    },
+    {
+      "id": "obs-net-005",
+      "kind": "request_attempt",
+      "collector": "network",
+      "observedAt": "2026-09-22T12:00:00.900Z",
+      "data": {
+        "requestRef": "req-03",
+        "origin": "https://skrifttyper.cdn.example",
+        "method": "GET",
+        "resourceType": "font",
+        "relativeTimeMs": 900
+      }
+    },
+    {
+      "id": "obs-net-006",
+      "kind": "response_received",
+      "collector": "network",
+      "observedAt": "2026-09-22T12:00:01.100Z",
+      "data": {
+        "requestRef": "req-03",
+        "origin": "https://skrifttyper.cdn.example",
+        "status": 200,
+        "relativeTimeMs": 1100,
+        "mimeType": "font/woff2"
+      }
+    },
+    {
+      "id": "obs-cookie-001",
+      "kind": "cookie_stored",
+      "collector": "cookies",
+      "observedAt": "2026-09-22T12:00:01.200Z",
+      "data": {
+        "name": "session_id",
+        "domain": "skole.example",
+        "secure": true,
+        "httpOnly": true,
+        "sameSite": "Lax",
+        "lifetimeCategory": "session"
+      }
+    },
+    {
+      "id": "obs-cookie-002",
+      "kind": "cookie_stored",
+      "collector": "cookies",
+      "observedAt": "2026-09-22T12:00:01.210Z",
+      "data": {
+        "name": "theme_valg",
+        "domain": "skole.example",
+        "secure": true,
+        "httpOnly": false,
+        "sameSite": "Strict",
+        "lifetimeCategory": "persistent"
+      }
+    },
+    {
+      "id": "obs-store-001",
+      "kind": "storage_summary",
+      "collector": "storage",
+      "observedAt": "2026-09-22T12:00:01.300Z",
+      "data": {
+        "origin": "https://skole.example",
+        "mechanism": "localStorage",
+        "count": 2,
+        "accessible": true
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "f-net-001",
+      "ruleId": "RULE_NET_FIRST_PARTY",
+      "ruleVersion": "1.0.0",
+      "category": "network",
+      "epistemicStatus": "observed",
+      "evidenceIds": [
+        "obs-net-002"
+      ],
+      "sourceRefs": [
+        {
+          "id": "psl",
+          "name": "Public Suffix List",
+          "version": "2026.01",
+          "url": "https://publicsuffix.org"
+        }
+      ],
+      "explanationKey": "net_first_party",
+      "limitations": [
+        "Formål med forbindelsen er ukendt uden kildematch",
+        "Viser modtaget netværksrespons, ikke efterfølgende datadeling"
+      ],
+      "title": "Førstepartsforbindelse til skole.example",
+      "description": "Browseren modtog 1 netværkssvar fra førstepartsdomænet skole.example.",
+      "data": {
+        "domain": "skole.example",
+        "isThirdParty": false,
+        "responseCount": 1,
+        "origins": [
+          "https://skole.example"
+        ]
+      }
+    },
+    {
+      "id": "f-net-002",
+      "ruleId": "RULE_NET_THIRD_PARTY",
+      "ruleVersion": "1.0.0",
+      "category": "network",
+      "epistemicStatus": "unknown",
+      "evidenceIds": [
+        "obs-net-004"
+      ],
+      "sourceRefs": [
+        {
+          "id": "psl",
+          "name": "Public Suffix List",
+          "version": "2026.01",
+          "url": "https://publicsuffix.org"
+        }
+      ],
+      "explanationKey": "net_third_party",
+      "limitations": [
+        "Formål med forbindelsen er ukendt uden kildematch",
+        "Viser modtaget netværksrespons, ikke efterfølgende datadeling"
+      ],
+      "title": "Tredjepartsforbindelse til analyse.example",
+      "description": "Browseren modtog 1 netværkssvar fra tredjepartsdomænet analyse.example. Formålet kan ikke afgøres alene ud fra netværkssvaret.",
+      "data": {
+        "domain": "analyse.example",
+        "isThirdParty": true,
+        "responseCount": 1,
+        "origins": [
+          "https://statistisk.analyse.example"
+        ]
+      }
+    },
+    {
+      "id": "f-net-003",
+      "ruleId": "RULE_NET_THIRD_PARTY",
+      "ruleVersion": "1.0.0",
+      "category": "network",
+      "epistemicStatus": "unknown",
+      "evidenceIds": [
+        "obs-net-006"
+      ],
+      "sourceRefs": [
+        {
+          "id": "psl",
+          "name": "Public Suffix List",
+          "version": "2026.01",
+          "url": "https://publicsuffix.org"
+        }
+      ],
+      "explanationKey": "net_third_party",
+      "limitations": [
+        "Formål med forbindelsen er ukendt uden kildematch",
+        "Viser modtaget netværksrespons, ikke efterfølgende datadeling"
+      ],
+      "title": "Tredjepartsforbindelse til cdn.example",
+      "description": "Browseren modtog 1 netværkssvar fra tredjepartsdomænet cdn.example. Formålet kan ikke afgøres alene ud fra netværkssvaret.",
+      "data": {
+        "domain": "cdn.example",
+        "isThirdParty": true,
+        "responseCount": 1,
+        "origins": [
+          "https://skrifttyper.cdn.example"
+        ]
+      }
+    },
+    {
+      "id": "f-cookie-004",
+      "ruleId": "RULE_COOKIE_STORED",
+      "ruleVersion": "1.0.0",
+      "category": "cookies",
+      "epistemicStatus": "observed",
+      "evidenceIds": [
+        "obs-cookie-001"
+      ],
+      "sourceRefs": [
+        {
+          "id": "rfc6265bis",
+          "name": "RFC 6265bis: Cookies",
+          "version": "draft-20",
+          "url": "https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-rfc6265bis"
+        }
+      ],
+      "explanationKey": "cookie_session",
+      "limitations": [
+        "Cookie-værdi og sti er redigeret væk af privatlivshensyn",
+        "Dokumenterer tilstedeværelse af cookie i browserlageret"
+      ],
+      "title": "Gemt cookie: session_id",
+      "description": "Cookien \"session_id\" blev gemt for domænet \"skole.example\" (levetid: session, Secure: true, SameSite: Lax).",
+      "data": {
+        "name": "session_id",
+        "domain": "skole.example",
+        "secure": true,
+        "httpOnly": true,
+        "sameSite": "Lax",
+        "lifetimeCategory": "session"
+      }
+    },
+    {
+      "id": "f-cookie-005",
+      "ruleId": "RULE_COOKIE_STORED",
+      "ruleVersion": "1.0.0",
+      "category": "cookies",
+      "epistemicStatus": "observed",
+      "evidenceIds": [
+        "obs-cookie-002"
+      ],
+      "sourceRefs": [
+        {
+          "id": "rfc6265bis",
+          "name": "RFC 6265bis: Cookies",
+          "version": "draft-20",
+          "url": "https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-rfc6265bis"
+        }
+      ],
+      "explanationKey": "cookie_persistent",
+      "limitations": [
+        "Cookie-værdi og sti er redigeret væk af privatlivshensyn",
+        "Dokumenterer tilstedeværelse af cookie i browserlageret"
+      ],
+      "title": "Gemt cookie: theme_valg",
+      "description": "Cookien \"theme_valg\" blev gemt for domænet \"skole.example\" (levetid: persistent, Secure: true, SameSite: Strict).",
+      "data": {
+        "name": "theme_valg",
+        "domain": "skole.example",
+        "secure": true,
+        "httpOnly": false,
+        "sameSite": "Strict",
+        "lifetimeCategory": "persistent"
+      }
+    },
+    {
+      "id": "f-storage-006",
+      "ruleId": "RULE_STORAGE_SUMMARY",
+      "ruleVersion": "1.0.0",
+      "category": "storage",
+      "epistemicStatus": "observed",
+      "evidenceIds": [
+        "obs-store-001"
+      ],
+      "sourceRefs": [],
+      "explanationKey": "storage_detected",
+      "limitations": [
+        "WebSpor tæller kun antal poster; nøgler og indhold aflæses aldrig"
+      ],
+      "title": "Lokal lagring i localStorage (2 poster)",
+      "description": "Siden har oprettet 2 element(er) i localStorage under https://skole.example.",
+      "data": {
+        "origin": "https://skole.example",
+        "mechanism": "localStorage",
+        "count": 2
+      }
+    },
+    {
+      "id": "f-header-007",
+      "ruleId": "RULE_HEADER_STRICT_TRANSPORT_SECURITY",
+      "ruleVersion": "1.0.0",
+      "category": "headers",
+      "epistemicStatus": "observed",
+      "evidenceIds": [
+        "obs-hdr-hsts"
+      ],
+      "sourceRefs": [],
+      "explanationKey": "header_strict_transport_security",
+      "limitations": [
+        "Måler kun teknisk tilstedeværelse af header på final response",
+        "Dokumenterer ikke beskyttelse på websitets øvrige undersider"
+      ],
+      "title": "Sikkerhedshoved fundet: Strict-Transport-Security",
+      "description": "Serveren sendte headeren Strict-Transport-Security (status: valid).",
+      "data": {
+        "headerName": "Strict-Transport-Security",
+        "present": true,
+        "parserStatus": "valid",
+        "directives": {
+          "max-age": 31536000,
+          "includeSubDomains": true
+        }
+      }
+    },
+    {
+      "id": "f-header-008",
+      "ruleId": "RULE_HEADER_CONTENT_SECURITY_POLICY",
+      "ruleVersion": "1.0.0",
+      "category": "headers",
+      "epistemicStatus": "observed",
+      "evidenceIds": [
+        "obs-hdr-csp"
+      ],
+      "sourceRefs": [],
+      "explanationKey": "header_content_security_policy",
+      "limitations": [
+        "Måler kun teknisk tilstedeværelse af header på final response",
+        "Dokumenterer ikke beskyttelse på websitets øvrige undersider"
+      ],
+      "title": "Sikkerhedshoved fundet: Content-Security-Policy",
+      "description": "Serveren sendte headeren Content-Security-Policy (status: valid).",
+      "data": {
+        "headerName": "Content-Security-Policy",
+        "present": true,
+        "parserStatus": "valid",
+        "directives": {
+          "default-src": "'self'",
+          "frame-ancestors": "'self'"
+        }
+      }
+    },
+    {
+      "id": "f-header-009",
+      "ruleId": "RULE_HEADER_REFERRER_POLICY",
+      "ruleVersion": "1.0.0",
+      "category": "headers",
+      "epistemicStatus": "observed",
+      "evidenceIds": [
+        "obs-hdr-ref"
+      ],
+      "sourceRefs": [],
+      "explanationKey": "header_referrer_policy",
+      "limitations": [
+        "Måler kun teknisk tilstedeværelse af header på final response",
+        "Dokumenterer ikke beskyttelse på websitets øvrige undersider"
+      ],
+      "title": "Sikkerhedshoved fundet: Referrer-Policy",
+      "description": "Serveren sendte headeren Referrer-Policy (status: valid).",
+      "data": {
+        "headerName": "Referrer-Policy",
+        "present": true,
+        "parserStatus": "valid",
+        "directives": {
+          "policy": "strict-origin-when-cross-origin"
+        }
+      }
+    },
+    {
+      "id": "f-header-010",
+      "ruleId": "RULE_HEADER_X_CONTENT_TYPE_OPTIONS",
+      "ruleVersion": "1.0.0",
+      "category": "headers",
+      "epistemicStatus": "observed",
+      "evidenceIds": [
+        "obs-hdr-nosniff"
+      ],
+      "sourceRefs": [],
+      "explanationKey": "header_x_content_type_options",
+      "limitations": [
+        "Måler kun teknisk tilstedeværelse af header på final response",
+        "Dokumenterer ikke beskyttelse på websitets øvrige undersider"
+      ],
+      "title": "Sikkerhedshoved fundet: X-Content-Type-Options",
+      "description": "Serveren sendte headeren X-Content-Type-Options (status: valid).",
+      "data": {
+        "headerName": "X-Content-Type-Options",
+        "present": true,
+        "parserStatus": "valid",
+        "directives": {
+          "value": "nosniff"
+        }
+      }
+    },
+    {
+      "id": "f-header-011",
+      "ruleId": "RULE_HEADER_X_FRAME_OPTIONS",
+      "ruleVersion": "1.0.0",
+      "category": "headers",
+      "epistemicStatus": "observed",
+      "evidenceIds": [
+        "obs-hdr-xfo"
+      ],
+      "sourceRefs": [],
+      "explanationKey": "header_x_frame_options",
+      "limitations": [
+        "Måler kun teknisk tilstedeværelse af header på final response",
+        "Dokumenterer ikke beskyttelse på websitets øvrige undersider"
+      ],
+      "title": "Sikkerhedshoved fundet: X-Frame-Options",
+      "description": "Serveren sendte headeren X-Frame-Options (status: valid).",
+      "data": {
+        "headerName": "X-Frame-Options",
+        "present": true,
+        "parserStatus": "valid",
+        "directives": {
+          "value": "SAMEORIGIN"
+        }
+      }
+    }
+  ],
+  "indicators": {
+    "I-01": {
+      "value": 2,
+      "evidenceIds": [
+        "obs-net-004",
+        "obs-net-006"
+      ],
+      "ruleVersion": "1.0.0"
+    },
+    "I-02": {
+      "value": 2,
+      "evidenceIds": [
+        "obs-cookie-001",
+        "obs-cookie-002"
+      ],
+      "ruleVersion": "1.0.0"
+    },
+    "I-03": {
+      "value": null,
+      "reasonCode": "DATASET_UNAVAILABLE",
+      "evidenceIds": [],
+      "ruleVersion": "1.0.0"
+    },
+    "I-04": {
+      "value": 100,
+      "evidenceIds": [
+        "obs-trans-001",
+        "obs-hdr-hsts",
+        "obs-hdr-csp",
+        "obs-hdr-ref",
+        "obs-hdr-nosniff",
+        "obs-hdr-xfo"
+      ],
+      "ruleVersion": "1.0.0",
+      "details": {
+        "https": true,
+        "hsts": true,
+        "csp": true,
+        "referrerPolicy": true,
+        "nosniff": true,
+        "frameProtection": true
+      },
+      "passedChecksCount": 6,
+      "totalChecksCount": 6
+    }
+  },
+  "integrity": {
+    "algorithm": "SHA-256",
+    "canonicalization": "RFC8785",
+    "digest": "20965ad43d9c0bb01e3718878a9d5ed3e37d5738d8d90f4ea433e9ade53cf928"
+  }
+}

@@ -1,0 +1,18 @@
+# Base image with official Playwright Chromium dependencies
+FROM mcr.microsoft.com/playwright:v1.49.0-noble AS runner
+
+WORKDIR /app
+ENV NODE_ENV=production
+
+# Security: non-root user per S-03
+USER pwuser
+
+COPY package*.json tsconfig*.json ./
+COPY packages/ ./packages/
+COPY services/scanner/ ./services/scanner/
+
+# Build scanner
+RUN npm ci && npm run build --workspace=@webspor/scanner
+
+# Sandbox and capabilities are enforced by container runtime
+CMD ["node", "services/scanner/dist/index.js"]

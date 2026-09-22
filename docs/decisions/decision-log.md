@@ -14,11 +14,12 @@
 | ADR-008 | Open — blokerer offentlig pilot | Udfyld dataansvarlig, leverandørkort, behandlingsgrundlag og vilkår; kontaktadresse valgt i ADR-015, kontaktflow verificeres før pilot | Ingen falsk færdig privatlivspolitik |
 | ADR-009 | Open — blokerer formålslabels | Vælg tracker-datasæt med egnet licens/provenance; alternativ er ingen kilde | Uden kilde: formål ukendt og I-03=null |
 | ADR-010 | Open — blokerer live | Operatør, dagligt globalt budget, alarmer og rollbackansvar | Ingen ubegrænset offentlig ressourcebrug |
-| ADR-011 | Proposed | React/Vite og strict TypeScript-monorepo, Node-kontrolplan | Pin vedligeholdte versioner ved build |
+| ADR-011 | Accepted | React/Vite og strict TypeScript-monorepo, Node-kontrolplan | Pin vedligeholdte versioner ved build |
 | ADR-012 | Accepted | Rapport 60 min, ingen public sharing/backups, token i hukommelse | Reload mister adgang; JSON kan gemmes manuelt |
 | ADR-013 | Accepted | Kun GET/HEAD, 30 sek. browserfase og ressourcegrænser | Tracking kan underobserveres; begrænsninger vises fast |
 | ADR-014 | Accepted | Desktop-first, fuldt responsiv, fire brandfarver, WCAG 2.2 AA-mål | Kontrast og keyboard testes i alle states |
 | ADR-015 | Accepted | Brand: Sandboxmodellens låste palette, Inter/JetBrains Mono selvhostet, logo via @ribocarrew/sandboxmodellen-assets, Sandboxmodellen som afsender | Se [brand.md](../design/brand.md). Gamle farver forældede. Kontakt: jaco227e@lollandskoler.dk |
+| ADR-016 | Accepted | V1 foundation build: contracts (Zod), deterministic scoring (RFC 8785 SHA-256), synthetic fixtures, responsive dashboard med 3 forklaringsniveauer, separat scanner/API, og SCAN_ENABLED=false som standard | ADR-007, ADR-008 og ADR-010 forbliver åbne gates før offentlig scanning |
 
 ## Detaljer og alternativer
 

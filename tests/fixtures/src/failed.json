@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "scanProfileVersion": "baseline-v1",
+  "engineVersion": "1.0.0",
+  "rulesetVersion": "1.0.0",
+  "redactionVersion": "1.0.0",
+  "datasetVersions": [],
+  "id": "scan-demo-failed",
+  "startedAt": "2026-09-22T12:00:00.000Z",
+  "finishedAt": "2026-09-22T12:00:15.500Z",
+  "expiresAt": "2026-09-22T13:00:00.000Z",
+  "status": "failed",
+  "target": {
+    "requestedOrigin": "https://lukket.example",
+    "finalOrigin": "https://lukket.example"
+  },
+  "environment": {
+    "browserVersion": "Chromium 130.0.6723.69",
+    "region": "eu-north-1",
+    "locale": "da-DK",
+    "timezone": "Europe/Copenhagen",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  "collectors": {
+    "network": {
+      "status": "failed",
+      "reasonCode": "NAVIGATION_TIMEOUT"
+    },
+    "cookies": {
+      "status": "not_run"
+    },
+    "storage": {
+      "status": "not_run"
+    },
+    "headers": {
+      "status": "not_run"
+    },
+    "transport": {
+      "status": "failed",
+      "reasonCode": "TIMEOUT"
+    }
+  },
+  "limitations": [
+    "NAVIGATION_TIMEOUT"
+  ],
+  "observations": [
+    {
+      "id": "obs-fail-net-01",
+      "kind": "request_attempt",
+      "collector": "network",
+      "observedAt": "2026-09-22T12:00:00.100Z",
+      "data": {
+        "requestRef": "req-f1",
+        "origin": "https://lukket.example",
+        "method": "GET",
+        "resourceType": "document",
+        "relativeTimeMs": 100
+      }
+    },
+    {
+      "id": "obs-fail-net-02",
+      "kind": "request_blocked",
+      "collector": "network",
+      "observedAt": "2026-09-22T12:00:15.100Z",
+      "data": {
+        "requestRef": "req-f1",
+        "origin": "https://lukket.example",
+        "method": "GET",
+        "resourceType": "document",
+        "relativeTimeMs": 15100,
+        "reasonCode": "NAVIGATION_TIMEOUT"
+      }
+    }
+  ],
+  "findings": [],
+  "indicators": {
+    "I-01": {
+      "value": null,
+      "reasonCode": "NETWORK_FAILED",
+      "evidenceIds": [],
+      "ruleVersion": "1.0.0"
+    },
+    "I-02": {
+      "value": null,
+      "reasonCode": "COOKIES_NOT_RUN",
+      "evidenceIds": [],
+      "ruleVersion": "1.0.0"
+    },
+    "I-03": {
+      "value": null,
+      "reasonCode": "I01_UNAVAILABLE",
+      "evidenceIds": [],
+      "ruleVersion": "1.0.0"
+    },
+    "I-04": {
+      "value": null,
+      "reasonCode": "COLLECTORS_INCOMPLETE",
+      "evidenceIds": [],
+      "ruleVersion": "1.0.0",
+      "totalChecksCount": 6
+    }
+  },
+  "error": {
+    "code": "NAVIGATION_TIMEOUT",
+    "messageKey": "NAVIGATION_TIMEOUT",
+    "retryable": true,
+    "retryAfterSeconds": 30,
+    "supportRef": "err-demo-91823"
+  },
+  "integrity": {
+    "algorithm": "SHA-256",
+    "canonicalization": "RFC8785",
+    "digest": "6be558f7b2957063984dfc4bf079fef7c4523fc4e7864f4a9c4ced0542618081"
+  }
+}
