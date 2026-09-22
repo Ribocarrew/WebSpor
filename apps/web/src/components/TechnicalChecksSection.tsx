@@ -29,7 +29,7 @@ export const TechnicalChecksSection: React.FC<TechnicalChecksSectionProps> = ({ 
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '16px' }}>
         {checkKeys.map((key) => {
           const exp = technicalChecksExplanations[key];
           const status = details ? details[key] : null;

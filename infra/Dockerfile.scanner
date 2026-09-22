@@ -14,5 +14,6 @@ COPY services/scanner/ ./services/scanner/
 # Build scanner
 RUN npm ci && npm run build --workspace=@webspor/scanner
 
-# Sandbox and capabilities are enforced by container runtime
+# Container hardening (non-root). NOTE: Standard Docker containers and browser filters do NOT provide
+# documented network- or microVM-isolation (required by ADR-007 before live usage).
 CMD ["node", "services/scanner/dist/index.js"]

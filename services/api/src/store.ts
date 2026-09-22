@@ -11,12 +11,14 @@ export interface ScanJob {
   createdAt: number;
   expiresAt: number;
   pollAfterSeconds: number;
+  ipIdentity?: string;
   report?: ScanReport;
   error?: ErrorPayload;
 }
 
 export interface Tombstone {
   id: string;
+  tokenHash: string;
   deletedAt: number;
   expiresAt: number;
 }
@@ -24,7 +26,7 @@ export interface Tombstone {
 export class ScanStore {
   private jobs = new Map<string, ScanJob>();
   private tombstones = new Map<string, Tombstone>();
-  private idempotency = new Map<string, { job: ScanJob; bodyHash: string; expiresAt: number }>();
+  private idempotency = new Map<string, { job: ScanJob; bodyHash: string; accessToken: string; expiresAt: number }>();
   private ipHistory = new Map<string, number[]>(); // timestamp[]
   private domainHistory = new Map<string, number>(); // last visit timestamp
   private hmacKey = randomBytes(32);
@@ -68,10 +70,10 @@ export class ScanStore {
       return { allowed: false, retryAfterSeconds: 3600, reason: 'RATE_LIMITED' };
     }
 
-    // 2. Check active jobs for IP (max 1 active)
+    // 2. Check active jobs for IP (S-04: max 1 active job pr. identity)
     for (const job of this.jobs.values()) {
-      if (['queued', 'validating', 'running', 'processing'].includes(job.status)) {
-        // active job exists
+      if (job.ipIdentity === ipIdentity && ['queued', 'validating', 'running', 'processing'].includes(job.status)) {
+        return { allowed: false, retryAfterSeconds: 5, reason: 'CONCURRENT_LIMIT' };
       }
     }
 
@@ -93,7 +95,7 @@ export class ScanStore {
     this.domainHistory.set(domain, now);
   }
 
-  public checkIdempotency(key: string, bodyHash: string): { hit: boolean; job?: ScanJob; conflict?: boolean } {
+  public checkIdempotency(key: string, bodyHash: string): { hit: boolean; job?: ScanJob; accessToken?: string; conflict?: boolean } {
     const entry = this.idempotency.get(key);
     if (!entry) return { hit: false };
     if (entry.expiresAt < Date.now()) {
@@ -103,18 +105,19 @@ export class ScanStore {
     if (entry.bodyHash !== bodyHash) {
       return { hit: true, conflict: true };
     }
-    return { hit: true, job: entry.job };
+    return { hit: true, job: entry.job, accessToken: entry.accessToken };
   }
 
-  public setIdempotency(key: string, bodyHash: string, job: ScanJob) {
+  public setIdempotency(key: string, bodyHash: string, job: ScanJob, accessToken: string) {
     this.idempotency.set(key, {
       job,
       bodyHash,
+      accessToken,
       expiresAt: Date.now() + 10 * 60 * 1000, // 10 min TTL
     });
   }
 
-  public createJob(targetUrl: string, token: string): ScanJob {
+  public createJob(targetUrl: string, token: string, ipIdentity?: string): ScanJob {
     const now = Date.now();
     const id = `scan-${randomBytes(12).toString('hex')}`;
     let domain = 'unknown';
@@ -134,6 +137,7 @@ export class ScanStore {
       createdAt: now,
       expiresAt: now + 60 * 60 * 1000, // 60 min TTL
       pollAfterSeconds: 2,
+      ipIdentity,
     };
 
     this.jobs.set(id, job);
@@ -150,14 +154,18 @@ export class ScanStore {
     return job;
   }
 
-  public isTombstoned(id: string): boolean {
+  public getTombstone(id: string): Tombstone | null {
     const tomb = this.tombstones.get(id);
-    if (!tomb) return false;
+    if (!tomb) return null;
     if (tomb.expiresAt < Date.now()) {
       this.tombstones.delete(id);
-      return false;
+      return null;
     }
-    return true;
+    return tomb;
+  }
+
+  public isTombstoned(id: string): boolean {
+    return this.getTombstone(id) !== null;
   }
 
   public updateJob(id: string, updates: Partial<ScanJob>) {
@@ -168,12 +176,16 @@ export class ScanStore {
   }
 
   public deleteJob(id: string) {
-    this.jobs.delete(id);
-    this.tombstones.set(id, {
-      id,
-      deletedAt: Date.now(),
-      expiresAt: Date.now() + 10 * 60 * 1000, // 10 min tombstone
-    });
+    const job = this.jobs.get(id);
+    if (job) {
+      this.jobs.delete(id);
+      this.tombstones.set(id, {
+        id,
+        tokenHash: job.tokenHash,
+        deletedAt: Date.now(),
+        expiresAt: Date.now() + 10 * 60 * 1000, // 10 min tombstone
+      });
+    }
   }
 
   private cleanup() {

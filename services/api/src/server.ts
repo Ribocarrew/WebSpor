@@ -3,7 +3,12 @@ import { randomBytes, createHash } from 'node:crypto';
 import { validateAndNormalizeTargetUrl, getRegisterableDomain } from '@webspor/rules';
 import { scanStore } from './store.js';
 
-export function createApiServer() {
+export interface ApiServerOptions {
+  allowInternalTesting?: boolean;
+}
+
+export function createApiServer(options: ApiServerOptions = {}) {
+  const { allowInternalTesting = false } = options;
   const app = express();
 
   // Limit body size to 4 KiB per api-contract.md
@@ -23,14 +28,27 @@ export function createApiServer() {
 
   // POST /v1/scans
   app.post('/v1/scans', (req: Request, res: Response): void => {
-    // S-04 kill switch: default false
+    // S-04 / ADR-007 / ADR-008 / ADR-010:
+    // Ingen konfiguration må aktivere offentlig scanning før de nødvendige
+    // sikkerheds- og driftskrav er opfyldt og verificeret i staging.
+    if (!allowInternalTesting) {
+      res.status(503).json({
+        code: 'SCAN_DISABLED',
+        messageKey: 'SCAN_DISABLED',
+        retryable: false,
+        message: 'Offentlig scanning kan ikke aktiveres via konfiguration alene. Sikkerheds- og driftskrav (ADR-007 microVM/gateway, ADR-008 DPA, ADR-010 driftsbudget) er åbne og ikke verificeret i staging.',
+      });
+      return;
+    }
+
+    // Kill switch within test harness
     const scanEnabled = process.env.SCAN_ENABLED === 'true';
     if (!scanEnabled) {
       res.status(503).json({
         code: 'SCAN_DISABLED',
         messageKey: 'SCAN_DISABLED',
         retryable: false,
-        message: 'Offentlig live-scanning er deaktiveret som standard indtil EU-isolation og egressgateway er deployet (ADR-007).',
+        message: 'Scanning er slået fra af kill switch (SCAN_ENABLED=false).',
       });
       return;
     }
@@ -67,9 +85,10 @@ export function createApiServer() {
         return;
       }
       if (idemp.hit && idemp.job) {
-        // Return existing job info (original token is not re-exposed in plain text if hash is stored)
+        // Return existing job info and original token per api-contract.md
         res.status(202).json({
           id: idemp.job.id,
+          accessToken: idemp.accessToken,
           status: idemp.job.status,
           expiresAt: new Date(idemp.job.expiresAt).toISOString(),
           pollAfterSeconds: idemp.job.pollAfterSeconds,
@@ -93,11 +112,11 @@ export function createApiServer() {
 
     // Generate 256-bit cryptographic capability token (S-05)
     const accessToken = randomBytes(32).toString('hex');
-    const job = scanStore.createJob(validation.canonicalUrl, accessToken);
+    const job = scanStore.createJob(validation.canonicalUrl, accessToken, ipIdentity);
     scanStore.recordScanAttempt(ipIdentity, domain);
 
     if (idempotencyKey) {
-      scanStore.setIdempotency(`${ipIdentity}:${idempotencyKey}`, bodyHash, job);
+      scanStore.setIdempotency(`${ipIdentity}:${idempotencyKey}`, bodyHash, job, accessToken);
     }
 
     res.status(202).json({
@@ -120,8 +139,15 @@ export function createApiServer() {
       return;
     }
 
-    if (scanStore.isTombstoned(id)) {
-      res.status(410).json({ code: 'RESULT_EXPIRED', message: 'Rapporten er udløbet og slettet.' });
+    // Tombstone check with timing-safe token verification per api-contract.md
+    const tombstone = scanStore.getTombstone(id);
+    if (tombstone) {
+      if (scanStore.verifyToken(token, tombstone.tokenHash)) {
+        res.status(410).json({ code: 'RESULT_EXPIRED', message: 'Rapporten er udløbet og slettet.' });
+        return;
+      }
+      // If token does not match, return 404 to avoid leaking job existence
+      res.status(404).json({ code: 'NOT_FOUND', message: 'Undersøgelse ikke fundet eller ugyldigt token.' });
       return;
     }
 
@@ -152,15 +178,20 @@ export function createApiServer() {
       return;
     }
 
-    // Idempotent deletion per API contract
-    if (scanStore.isTombstoned(id)) {
-      res.status(204).end();
+    // Idempotent deletion per API contract with valid token
+    const tombstone = scanStore.getTombstone(id);
+    if (tombstone) {
+      if (scanStore.verifyToken(token, tombstone.tokenHash)) {
+        res.status(204).end();
+        return;
+      }
+      res.status(404).json({ code: 'NOT_FOUND', message: 'Undersøgelse ikke fundet eller ugyldigt token.' });
       return;
     }
 
     const job = scanStore.getJob(id);
     if (!job || !scanStore.verifyToken(token, job.tokenHash)) {
-      res.status(404).json({ code: 'NOT_FOUND', message: 'Undersøgelse ikke fundet eller forkert token.' });
+      res.status(404).json({ code: 'NOT_FOUND', message: 'Undersøgelse ikke fundet eller ugyldigt token.' });
       return;
     }
 
