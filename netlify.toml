@@ -1,6 +1,6 @@
 [build]
-  base = "apps/web"
-  publish = "dist"
+  base = "."
+  publish = "apps/web/dist"
   command = "npm run build"
 
 [[headers]]
