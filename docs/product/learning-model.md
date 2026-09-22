@@ -16,6 +16,10 @@ Hvad så vi? → Hvad er det? → Hvad kan det betyde? → Hvad ved vi ikke? →
 
 **Teknisk:** Origin, resource type, response-status, tidsstempel, klassifikationsregel, Public Suffix List-version og observation-ID. Domænegrænser er ikke nødvendigvis selskabsgrænser.
 
+## Pædagogisk grundidé
+
+WebSpor bygger på Sandboxmodellens princip: Tænk før du klikker, men klik. Scanneren klikker bevidst ikke. Den besøger siden passivt, viser sporene og lader eleven tænke over dem. Klikket ligger hos eleven, bagefter og med viden. WebSpor er altså ikke en advarsel mod at bruge nettet, men et værktøj til at bruge det med åbne øjne.
+
 ## V1-begreber
 
 Browser, request, response, domæne, tredjepart, cookie, session, localStorage, HTTPS, header, trackerklassifikation, samtykke, evidens og usikkerhed. Hvert opslag har definition, neutralt eksempel, begrænsning og metodehenvisning. Fingerprinting og videresalg kan forklares som begreber med »ikke undersøgt i V1«.

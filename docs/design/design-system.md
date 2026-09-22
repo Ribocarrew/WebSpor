@@ -1,23 +1,28 @@
 # Designsystem og stilprofil
 
-Retning: roligt, nutidigt nordisk dashboard med didaktisk dybde. Overskuelig første visning, præcise detaljer ved behov. Ingen hackeræstetik, blinkende faresignaler, neon, gamificeret sikkerhedskarakter eller barnlig illustration. Brugerens fire farver er den autoritative brandpalette.
+Retning: roligt, nutidigt nordisk dashboard med didaktisk dybde. Overskuelig første visning, præcise detaljer ved behov. Ingen hackeræstetik, blinkende faresignaler, neon, gamificeret sikkerhedskarakter eller barnlig illustration. Sandboxmodellens låste palette er den autoritative brandpalette. Logo, taglines, afsender og fonte står i [brand.md](brand.md), som er bindende.
 
 ## Tokens
 
 | Token | Værdi | Rolle |
 |---|---|---|
-| brand.teal | `#1F6F78` | Primær handling, aktive elementer og links |
-| brand.orange | `#E39A3B` | Varm accent, udvalgt indhold; ikke universel farefarve |
-| surface.canvas | `#F6F3EC` | Sidebaggrund |
-| text.primary | `#2F3C4A` | Brødtekst og overskrifter |
+| brand.teal | `#0F766E` | Primær handling, aktive elementer og links |
+| brand.amber | `#D97706` | Varm accent, udvalgt indhold; ikke universel farefarve |
+| surface.canvas | `#F5F5F4` | Sidebaggrund |
+| text.primary | `#1E293B` | Brødtekst og overskrifter |
 | surface.card | `#FFFFFF` | Kort og input |
-| border.strong | `#1F6F78` | Fokus og nødvendige komponentgrænser |
+| border.strong | `#0F766E` | Fokus og nødvendige komponentgrænser |
+| state.error | `#DC2626` | Kun tekniske fejl i UI (fx ugyldig URL). Aldrig risikovurdering af et website |
 
-Brug slate-tekst på orange, aldrig hvid brødtekst på orange. Teal fungerer til tekst på off-white og hvid tekst på teal; verificér faktiske kombinationer og states med WCAG-beregning ved build. Orange på off-white bruges kun dekorativt uden informationsansvar. Farver må aldrig alene formidle status. Brug ord og ikon: »Observeret«, »Delvist«, »Ukendt«. Fejl skal have ikon/tekst og en kontrastverificeret paletteudvidelse, hvis den eksisterende palette ikke dækker behovet.
+Målt kontrast (WCAG 2.2): teal på canvas 5,0:1, teal på hvid 5,5:1, hvid på teal 5,5:1, slate på canvas 13,4:1, slate på amber 4,6:1. Hvid på amber er kun 3,2:1 og må ikke bruges til tekst. Amber på canvas er 2,9:1 og må kun bruges dekorativt.
+
+De gamle værdier #1F6F78, #E39A3B, #F6F3EC og #2F3C4A er forældede og må ikke forekomme i koden.
+
+Brug slate-tekst på amber, aldrig hvid brødtekst på amber. Teal fungerer til tekst på off-white og hvid tekst på teal; verificér faktiske kombinationer og states med WCAG-beregning ved build. Amber på off-white bruges kun dekorativt uden informationsansvar. Farver må aldrig alene formidle status. Brug ord og ikon: »Observeret«, »Delvist«, »Ukendt«. Tekniske UI-fejl bruger state.error med ikon/tekst; farven må aldrig bruges som risikovurdering af et website.
 
 ## Typografi og rum
 
-Systemfont som default: `system-ui, -apple-system, Segoe UI, sans-serif`. Ingen eksterne fontrequests. Brødtekst 16 px/1.6; sekundær tekst mindst 14 px/1.5; h1 36–48 px/1.15 på desktop, 28–34 px på mobil; h2 24–30 px; h3 20 px. Max læselængde ca. 70 tegn. Tal bruger tabular numerals, tekniske værdier en systemmonospace.
+Inter til overskrifter og brødtekst, JetBrains Mono til tekniske værdier. Begge selvhostes via npm efter [brand.md](brand.md). Ingen eksterne fontrequests. Brødtekst 16 px/1.6; sekundær tekst mindst 14 px/1.5; h1 36–48 px/1.15 på desktop, 28–34 px på mobil; h2 24–30 px; h3 20 px. Max læselængde ca. 70 tegn. Tal bruger tabular numerals, tekniske værdier JetBrains Mono.
 
 Spacing: 4, 8, 12, 16, 24, 32, 48, 64 px. Kort-radius 16 px, inputs 8 px, badges 999 px. Diskret skygge alene som dybde, aldrig som eneste grænse. Desktop maxbredde 1280 px med 32 px margen; mobil 16 px. 12-kolonne-grid over 1024 px, to kolonner ved 768–1023 px, én kolonne under 768 px. Breakpoints er designvalg, ikke enhedsgarantier.
 

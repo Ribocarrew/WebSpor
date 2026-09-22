@@ -13,6 +13,7 @@ Specifikationen til første build, ikke dokumentation af færdig software. Dato:
 
 ## Design
 
+- [Brand, logo og afsender](design/brand.md)
 - [Designsystem og stilprofil](design/design-system.md)
 - [UX](design/ux.md)
 - [Tilgængelighed](design/accessibility.md)

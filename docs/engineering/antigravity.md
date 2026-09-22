@@ -4,7 +4,7 @@ Antigravity er implementeringsværktøj; repoets dokumentation er produktets aut
 
 ## Læs før kode
 
-Start med [AGENTS.md](../../AGENTS.md), [grundlag](../00-project-charter.md), [do-not-do](do-not-do.md), [sikkerhed](../architecture/security.md), [privacy](../governance/privacy-data-governance.md), [evidens](../engine/evidence-classification.md), [API](../architecture/api-contract.md) og [decision log](../decisions/decision-log.md). Fortsæt via [dokumentationskortet](../README.md) med produkt/design, scan, scoring, tests og release.
+Start med [AGENTS.md](../../AGENTS.md), [grundlag](../00-project-charter.md), [do-not-do](do-not-do.md), [sikkerhed](../architecture/security.md), [privacy](../governance/privacy-data-governance.md), [evidens](../engine/evidence-classification.md), [API](../architecture/api-contract.md) og [decision log](../decisions/decision-log.md) og [brand](../design/brand.md). Fortsæt via [dokumentationskortet](../README.md) med produkt/design, scan, scoring, tests og release.
 
 ## Arbejdsmåde
 
@@ -27,7 +27,9 @@ privacy, evidens, API, scoring, design, tests og releasekrav.
 Implementér fase 1 i roadmap: strict TypeScript-struktur, runtime schemas,
 komplette syntetiske success/partial/failed-fixtures, deterministiske regler,
 redaktion og et responsivt dansk dashboard med tre forklaringsniveauer.
-Brug #1F6F78, #E39A3B, #F6F3EC og #2F3C4A efter designsystemet.
+Brug #0F766E, #D97706, #F5F5F4 og #1E293B efter designsystemet.
+Følg docs/design/brand.md præcist for logo, fonte, taglines og
+afsender. Generér aldrig et logo eller en placeholder.
 Demo skal være permanent mærket og må ikke være fallback for live-scans.
 
 Forbered derefter scanner/API efter den beskrevne faseorden. Aktivér aldrig

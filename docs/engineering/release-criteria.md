@@ -15,6 +15,7 @@ En offentlig V1 kræver alle obligatoriske punkter. Afkryds kun med konkret comm
 | R-09 Supply chain | Lockfile, image digest, licenser, dependency/secret scan | Ikke verificeret |
 | R-10 Indhold | Dansk korrekt, metode offentlig, ingen domænehardcoding eller juridiske domme | Ikke verificeret |
 | R-11 AI | Deaktiveret, eller separat AI-gate fuldt dokumenteret | Ikke verificeret |
+| R-12 Brand | Accepttest i [brand.md](../design/brand.md) bestået; ingen forældede farver i kode; nul eksterne kald for logo, favicon og fonte | Ikke verificeret |
 
 Security/privacyfejl, opdigtede resultater, skjult fallback, tokenlæk, forbudt egress og ukorrekt ukendt→nul er ubetingede stop. En demo-only preview kan deles som sådan før live-gate, men må ikke beskrives som fungerende scanner.
 

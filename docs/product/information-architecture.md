@@ -8,9 +8,9 @@
 | `/metode` | Scope, regler, versioner og begrænsninger | Ja |
 | `/laer` | Begreber og opgaver | Ja |
 | `/privatliv` | Faktisk behandling, opbevaring, kontakt | Ja |
-| `/om` | Formål, open source, ansvarlig organisation | Ja |
+| `/om` | Logo med fodspor-forklaring, Sandboxmodellen som afsender, formål, open source | Ja |
 
-Global navigation: Undersøg · Lær · Metode · Om. Footer: Privatliv, GitHub, version og verificeret kontakt. Ingen inaktiv sprogknap. Fremtidig `/en/` kræver oversættelsesreview.
+Global navigation: Undersøg · Lær · Metode · Om. Footer: logo (minimalt), "Tænk før du klikker, men klik.", "Et værktøj fra Sandboxmodellen · teknologivejlederen.dk", derefter Privatliv, GitHub, version og kontakt: [jaco227e@lollandskoler.dk](mailto:jaco227e@lollandskoler.dk). Se [brand.md](../design/brand.md). Ingen inaktiv sprogknap. Fremtidig `/en/` kræver oversættelsesreview.
 
 ## Rapporthierarki
 
